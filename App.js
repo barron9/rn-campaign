@@ -4700,10 +4700,15 @@ class SearchScreenx extends React.Component {
 	render() {
 		return (
 			<View style={{ height:Platform.OS=='ios'?Dimensions.get('window').height:Dimensions.get('window').height-StatusBar.currentHeight}}>
+		<Image 
+
+resizeMode={Platform.OS=='ios'?"repeat":null}	    
+source={require('./bg.jpg')} style={{position:'absolute',top:0,left:0,zIndex:0,opacity:.08}}
+/>
 			<View
 			style={{
 				backgroundColor: renk,
-
+opacity:.8,
 					height: Platform.OS === 'ios' ? 70 : 50,
 					flexDirection: 'row',
 					justifyContent: 'space-between',
@@ -4719,6 +4724,7 @@ class SearchScreenx extends React.Component {
 			<Icon2 name="arrow-left" size={20} color="white" />
 			</TouchableOpacity>
 			}
+	
 			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
 			underlineColorAndroid="rgba(0,0,0,0)"
 			style={{
