@@ -7,7 +7,7 @@ import {
 	Platform,ScrollView,Keyboard,PickerIOS,KeyboardAvoidingView,
 	StyleSheet,StatusBar,
 	Text,Easing,
-	View,TextInput,Dimensions,FlatList,Button,TouchableOpacity,Image,WebView,Animated,ActivityIndicator
+	View,TextInput,Dimensions,FlatList,TouchableOpacity,Image,WebView,Animated,ActivityIndicator
 } from 'react-native';
 import ButtonComponent, { CircleButton, RoundButton, RectangleButton } from 'react-native-button-component';
 import { iOSUIKit,material } from 'react-native-typography'
@@ -21,6 +21,7 @@ import {StackActions,
 } from 'react-navigation'; // 1.1.2
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/SimpleLineIcons';
+import EnIcon from 'react-native-vector-icons/Entypo'
 import ImageSlider from 'react-native-image-slider';
 import { BlurView } from 'react-native-blur';
 import AppIntro from 'react-native-app-intro';
@@ -29,7 +30,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Realm from 'realm';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface} from 'react-native-paper';
+import { TouchableRipple,FAB,Appbar ,Searchbar,RadioButton,Title,Divider,List,Paragraph,Surface,Button} from 'react-native-paper';
 
 const reducer = (state={},action)=>{
 
@@ -599,8 +600,8 @@ class HomeScreen extends React.Component {
 	  */
 		if(this.state.closelogin){
 			return (
-				<Animated.View style={{backgroundColor:'black',flex:1,
-						opacity: fadeAnim,         // Bind opacity to animated value
+				<Animated.View style={{backgroundColor:'#eee',flex:1,
+					//	opacity: fadeAnim,         // Bind opacity to animated value
 
 
 				}}>
@@ -616,7 +617,7 @@ class HomeScreen extends React.Component {
 				source={require('./bg.jpg')} style={{position:'absolute',top:0,left:0,zIndex:0,opacity:.08}}
 				/>
 
-				<KeyboardAvoidingView  behavior="padding" enabled style={styles.container}>
+				<KeyboardAvoidingView  behavior="padding" enabled style={{backgroundColor:'#eee',justifyContent:'center',alignItems:'center'}}>
 				<Image 
 				resizeMode={Platform.OS=='ios'?"repeat":null}	    
 
@@ -633,36 +634,36 @@ class HomeScreen extends React.Component {
 				}
 				</View>
 
-				<View>
+				<View style={{padding:10}}>
 
-				<Text style={material.title,{color:'white',fontSize:20,marginBottom:10,fontWeight:'800',textAlign:'center',marginBottom:20}}>Fırsatlar Kulübü</Text>
+				<Text style={material.title,{color:'#777',fontSize:20,marginBottom:10,fontWeight:'800',textAlign:'center',marginBottom:20}}>Fırsatlar Kulübü</Text>
 
-				<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-				style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="kullanıcı adı"
+				<TextInput placeholderTextColor="#333" underlineColorAndroid="rgba(0,0,0,0)" 
+				style={{height: 40,width:Dimensions.get('window').width/1.2,color:'#333',borderRadius:3,borderWidth:.5,borderColor:'#888',paddingLeft:10,marginBottom:10}} placeholder="Kullanıcı adı"
 				onChangeText={(UserName) => this.setState({UserName})}
 				value={this.state.UserName}
 				/>
-				<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-				style={{height: 40, width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="şifre"
+				<TextInput placeholderTextColor="#333" underlineColorAndroid="rgba(0,0,0,0)" 
+				style={{height: 40, width:Dimensions.get('window').width/1.2,color:'#333',borderRadius:3,borderWidth:.5,borderColor:'#888',paddingLeft:10,marginBottom:10}} placeholder="Şifre"
 				secureTextEntry={true}
 
 				onChangeText={(Password) => this.setState({Password})}
 				value={this.state.Password}
 
 				/>
-				<Text style={{color:'white',textAlign:'right',marginTop:10,marginBottom:10}} onPress={()=>this.props.navigation.navigate('Sifre')}>Şifremi Unuttum</Text>
+				<Text style={{color:'#333',textAlign:'right',padding:20}} onPress={()=>this.props.navigation.navigate('Sifre')}>Şifremi Unuttum</Text>
 				</View>
-				<TouchableOpacity onPress={()=>this.dologin()} style={{ opacity:.8,height:50,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'white',backgroundColor:'#123962',alignItems:'center',justifyContent:'center'}}>
+				<TouchableOpacity onPress={()=>this.dologin()} style={{ opacity:.8,height:50,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'#ccc',backgroundColor:'#ccc',alignItems:'center',justifyContent:'center'}}>
 				{!this.state.loading &&
-					<Text style={{color:'white',margin:15}}>Giriş Yap</Text>
+					<Text style={{color:'#333',margin:15}}>Giriş Yap</Text>
 				}
 				{this.state.loading &&
-						<ActivityIndicator size="small" color="white" />
+						<ActivityIndicator size="small" color="#ccc" />
 
 				}
 
 				</TouchableOpacity>
-				<Text style={{color:'white',textAlign:'right',marginTop:10,marginBottom:10}} onPress={()=>this.props.navigation.navigate('Kayit')}>Hesabınız yok mu?<Text style={{color:'yellow'}}> Kayıt Olun</Text></Text>
+				<Text style={{color:'#333',textAlign:'right',marginTop:10,marginBottom:10}} onPress={()=>this.props.navigation.navigate('Kayit')}>Hesabınız yok mu?<Text style={{color:'blue'}}> Kayıt Olun</Text></Text>
 
 
 
@@ -675,7 +676,7 @@ class HomeScreen extends React.Component {
 		else{
 
 			return(
-				<KeyboardAvoidingView  behavior="padding" enabled style={{flex:1,height:Dimensions.get('window').height+100}}>
+				<KeyboardAvoidingView  behavior="padding" enabled style={{flex:1,height:Dimensions.get('window').height+100,}}>
 				<StatusBar
 				backgroundColor={'transparent'}
 				translucent={true}
@@ -713,23 +714,30 @@ this.props.navigation.navigate('Arama', {
 				{this.state.selectedcase && 
 
 					<View>
-					{this.state.slider&&
+						<View style={{height:250,backgroundColor:'white',shadowOffset:{  width: 1,  height: 1,  },
+shadowColor: 'gray',
+shadowOpacity: 0.5,borderBottomRightRadius:30,borderBottomLeftRadius:30}}>
+					{this.state.slider&& 
+					<View style={{height:220,}}>
 						<ImageSlider images={this.state.slider} style={{height:220,flex:1}}/>
+						</View>
+
 					}
+					</View>
 					{this.state.selectedcase && 
 							<View style={{}}>
 
 							{this.state.shopcase &&
-								<View style={{height:55,borderBottomColor:renk,borderBottomWidth:.5}}>
-								<FlatList horizontal={true} style={{paddingLeft:5,paddingRight:5,height:55}}
+								<View style={{padding:5}}>
+								<FlatList horizontal={true} style={{padding:5,paddingRight:5}}
 								data={this.state.shopcase}
 
 
-								renderItem={({item}) => <TouchableOpacity style={{padding:5,borderTopLeftRadius:10,borderTopRightRadius:10,marginTop:10,alignItems:'center',justifyContent:'center',backgroundColor:this.state.selected===item.Name?renk:'#dddddd',borderColor:'gray',marginLeft:8}}
+								renderItem={({item}) => <TouchableOpacity style={{padding:5,shadowOffset:{  width: 1,  height: 1,  },
+								shadowColor: 'gray',
+								shadowOpacity: 0.5,borderRadius:10,marginTop:10,alignItems:'center',justifyContent:'center',backgroundColor:this.state.selected===item.Name?renk:'#dddddd',borderColor:'gray',marginLeft:8}}
 									onPress={()=>{this.setState({selectedcase:item.Products},function(){
 										this.setState({selected:item.Name})
-
-
 									})}}
 									><Text style={{color:this.state.selected===item.Name?'white':'#888',fontWeight:'800'}}
 									onPress={()=>{this.setState({selectedcase:item.Products},function(){
@@ -745,7 +753,10 @@ this.props.navigation.navigate('Arama', {
 							style={{paddingBottom:0}}
 							data={this.state.selectedcase}
 							renderItem={({item}) => <TouchableOpacity onPress={()=>this.props.navigation.navigate('Urun',{token:this.props.navigation.state.params.token,urun:item.Id})} >
-							<View style={{flexDirection:'column',alignItems:'center',width:Dimensions.get('window').width-20,backgroundColor:'white',margin:10,elevation:4,borderRadius:8}}>
+							<View style={{flexDirection:'column',alignItems:'center',width:Dimensions.get('window').width-20,backgroundColor:'white',margin:10,elevation:4,borderRadius:8,shadowOffset:{  width: 1,  height: 1,  },
+shadowColor: 'gray',
+shadowOpacity: 0.5,
+}}>
 							<Image
 							style={{ width: Dimensions.get('window').width, height: 150,margin:10,}}
 							resizeMode={'contain'}
@@ -908,7 +919,7 @@ class FirsatlarScreen extends React.Component {
 		fetch('https://www.firsatlarkulubu.com/oauth/api/catalog/list/', {
 			method: 'POST',
 			headers: {
-				Authorization: 'Bearer ' + this.state.token,
+				Authorization: 'Bearer ' + realm.objects('Uyeler')["0"].token,
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
 
@@ -919,8 +930,8 @@ class FirsatlarScreen extends React.Component {
 			})
 			.then(response => {
 				// alert(JSON.stringify(response))
-				this.setState({catdata:response})
-				this.bringcampaings(response[0].Id)
+				self.setState({catdata:response})
+				self.bringcampaings(response[0].Id)
 			})
 
 							});
@@ -982,12 +993,15 @@ class FirsatlarScreen extends React.Component {
 
 			{this.state.loading &&true &&<View style={{opacity:.7,width:Dimensions.get('window').width,height:Dimensions.get('window').height,alignItems:'center',justifyContent:'center',zIndex:100,position:'absolute'}}>
 				<ActivityIndicator size="small" color="orange" />
-				<Text style={{color:'white'}}>bekleyiniz...</Text>
+				<Text style={{color:'white',fontWeight:'900'}}>bekleyiniz...</Text>
 				</View>
 			}
 
 			{this.state.catdata  &&
-					<FlatList horizontal={true} style={{paddingLeft:5,paddingRight:5,backgroundColor:'#fdfdfd'}}
+					<FlatList  horizontal={true} showsHorizontalScrollIndicator={false} 
+					style={{paddingLeft:5,paddingRight:5,backgroundColor:'#fdfdfd',shadowOffset:{  width: 1,  height: 1,  },
+					shadowColor: 'gray',
+					shadowOpacity: 0.5,}}
 				data={this.state.catdata}
 				renderItem={({item}) => <TouchableOpacity style={{padding:10,backgroundColor:'transparent',borderColor:'gray',margin:8}} onPress={()=>this.bringcampaings(item.Id)}><Text style={{color:'black',fontWeight:'100'}}>{item.Name}</Text></TouchableOpacity>}
 					/>
@@ -999,16 +1013,18 @@ class FirsatlarScreen extends React.Component {
 			{this.state.productdata  &&
 				<FlatList horizontal={false} style={{paddingLeft:0,paddingRight:0}}
 				data={this.state.productdata}
-				renderItem={({item}) => <TouchableOpacity onPress={()=>this.props.navigation.navigate('Urun',{token:this.props.navigation.state.params.token,urun:item.Id})} >
-					<View style={{flexDirection:'column',margin:20,alignItems:'center',width:Dimensions.get('window').width-20,backgroundColor:'white',margin:10,elevation:4,borderRadius:8}}>
+				renderItem={({item}) => <TouchableOpacity onPress={()=>this.props.navigation.navigate('Urun',{token:this.state.token,urun:item.Id})} >
+					<View style={{flexDirection:'column',shadowOffset:{  width: 1,  height: 1,  },
+								shadowColor: 'gray',
+								shadowOpacity: 0.5,margin:20,alignItems:'center',width:Dimensions.get('window').width-20,backgroundColor:'white',margin:10,elevation:4,borderRadius:8}}>
 					<Image
 					style={{ width: Dimensions.get('window').width, height: 150,margin:10,}}
 					resizeMode={'contain'}
 					source={{ uri: 'https:' + item.Image }}
 					/>
 					<View style={{flexDirection:'column',marginTop:4,alignItems:'center',justifyContent:'center',width:200}}>
-					<Text style={{color:'black',fontSize:12}}>{item.Name}</Text><Text style={{color:'black',fontSize:16}}>{item.Brand}</Text>
-					<Text style={{color:'black',fontSize:12}}>{item.Model}</Text>
+					<Text style={{color:'black',fontSize:16,fontWeight:'800'}}>{item.Name}</Text><Text style={{color:'black',fontSize:16}}>{item.Brand}</Text>
+					<Text style={{color:'black',fontSize:14,textAlign:'center'}}>{item.Model}</Text>
 					{item.Price > 1 &&
 						<Text style={{color:'black',fontSize:12}}>{item.Price}</Text>
 					}
@@ -1069,8 +1085,14 @@ class Siparisler extends React.Component {
 		header:null
 	};
 	componentDidMount(){
-
-		this.customerorders()
+		var self =this
+		Realm.open({ schema: [uyeSchema,notificationSchema], schemaVersion: 5 })
+						.then(realm => {
+							//alert(JSON.stringify(realm.objects('Uyeler')["0"].token))
+							self.setState({token:realm.objects('Uyeler')["0"].token},function(){
+								self.customerorders()
+							});
+						})
 
 	}
 
@@ -1115,7 +1137,7 @@ class Siparisler extends React.Component {
 
 
 			{this.state.orders  &&
-				<FlatList horizontal={false} style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height-60,backgroundColor:'#ddd'}}
+				<FlatList horizontal={false} style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height-60}}
 				data={this.state.orders}
 				renderItem={({item}) => <TouchableOpacity style={{backgroundColor:'white',padding:10,borderRadius:9,borderColor:'#eee',borderBottomWidth:.5,marginBottom:0,margin:15 }} onPress={()=>this.props.navigation.navigate('SiparisDetay',{token:this.state.token,siparis:item.OrderId})} >
 					<View style={{flexDirection:'row',alignItems:'center',width:Dimensions.get('window').width,justifyContent:'center',marginLeft:20,}}>
@@ -1449,71 +1471,59 @@ class DigerScreen extends React.Component {
 
 
 
-			return(
-				<View>
-				<HHeader baslik="Diğer" title={this} arkaplan={renk}/>
-				<ScrollView>
-				<View style={{padding:0}}>
+			
+				return(<View><HHeader title={this} baslik="Ayarlar"/>
+		<List.Section title="Hesap Bilgilerim">
+				<List.Item onPress={()=>this.props.navigation.navigate('SifreDegistir',{token:this.state.token})} style={{backgroundColor:'white'}}
+				  title="Şifremi Değiştir"
+				  right={() => <EnIcon name="chevron-thin-right" size={20} color="#ccc" />}
+			   />
+				<List.Item onPress={()=>this.props.navigation.navigate('Hesabim',{token:this.state.token})} style={{backgroundColor:'white'}}
+				  title="Bilgilerimi Güncelle"
+				  right={() => <EnIcon name="chevron-thin-right" size={20} color="#ccc" />}
+			   />
+		
+		
+			 </List.Section>
+		<List.Section title="Sipariş Süreci">
+			<List.Item onPress={()=>this.props.navigation.navigate('Siparisler',{token:this.state.token})} style={{backgroundColor:'white'}}
+		
+				  title="Siparişlerim"
+				  right={() => <EnIcon name="chevron-thin-right" size={20} color="#ccc" />}
+			   />
+		
+					  </List.Section>
+		<List.Section title="Hesap Ayarları">
+			<List.Item onPress={()=>{
 
-				<TouchableOpacity  style={{backgroundColor:'white',width:Dimensions.get('window').width,marginTop:0,padding:10,flexDirection:'row',justifyContent:'space-between'}} onPress={()=>this.props.navigation.navigate('Siparisler',{token:this.props.navigation.state.params.token})}>
+this.setState({token:'',
+	UserName: '',
+	Password: '',
 
-				<Text style={{color:'gray',fontSize:20}} onPress={()=>this.props.navigation.navigate('Siparisler',{token:this.props.navigation.state.params.token})}>Siparişlerim</Text>
-				<Icon2 name="arrow-right" size={20} color="gray" />
-
-				</TouchableOpacity>
-				<TouchableOpacity  style={{backgroundColor:'white',width:Dimensions.get('window').width,marginTop:0,padding:10,flexDirection:'row',justifyContent:'space-between'}} onPress={()=>this.props.navigation.navigate('SifreDegistir',{token:this.props.navigation.state.params.token})}>
-
-				<Text style={{color:'gray',margin:0,fontSize:20}} onPress={()=>this.props.navigation.navigate('SifreDegistir',{token:this.props.navigation.state.params.token})}>Şifremi Değiştir</Text>
-				<Icon2 name="arrow-right" size={20} color="gray" />
-
-
-				</TouchableOpacity>
-
-				<TouchableOpacity  style={{backgroundColor:'white',width:Dimensions.get('window').width,marginTop:0,padding:10,flexDirection:'row',justifyContent:'space-between'}} onPress={()=>this.props.navigation.navigate('Hesabim',{token:this.props.navigation.state.params.token})}>
-
-				<Text style={{color:'gray',margin:0,fontSize:20}} onPress={()=>this.props.navigation.navigate('Hesabim',{token:this.props.navigation.state.params.token})}>Hesap Ayarları</Text>
-				<Icon2 name="arrow-right" size={20} color="gray" />
-
-				</TouchableOpacity>
-				{false &&
-				<TouchableOpacity  style={{backgroundColor:'white',width:Dimensions.get('window').width,marginTop:0,padding:10,flexDirection:'row',justifyContent:'space-between'}} onPress={()=>this.props.navigation.navigate('KVKK',{token:this.props.navigation.state.params.token})}>
-				<Text style={{color:'gray',margin:0,fontSize:20}} onPress={()=>this.props.navigation.navigate('KVKK',{token:this.props.navigation.state.params.token})}>Kişisel Verileri Koruma Kanunu</Text>
-				<Icon2 name="arrow-right" size={20} color="gray" />
-
-				</TouchableOpacity>
-				}
-				<TouchableOpacity  style={{backgroundColor:'white',width:Dimensions.get('window').width,marginTop:0,padding:10,flexDirection:'row',justifyContent:'space-between'}} onPress={()=>{
-					this.setState({UserName:'',Password:'',token:null,closelogin:true})
-				}}>
-				<Text style={{color:'gray',margin:0,fontSize:20}} onPress={()=>{
-					this.setState({token:null,UserName:'',Password:'',closelogin:true});
-					Realm.open({
-						schema: [uyeSchema,notificationSchema],
-						schemaVersion: 5,
-					}).then(realm => {
-						realm.write(() => {
-							realm.deleteAll();
-						});
-				this.props.navigation.navigate('Intro')
-						
-						//CodePush.restartApp();
-					});
-
-
-				}}>Çıkış</Text>
-				<View/>	
-				</TouchableOpacity>
-
-				</View>
-				</ScrollView>
-				<DropdownAlert ref={ref => this.dropdown = ref} />
-
-				</View>
-
-
-
-
-			)}
+},function(){
+	Realm.open({
+		schema: [uyeSchema,notificationSchema],
+		schemaVersion: 5,
+	}).then(realm => {
+		realm.write(() => {
+			realm.deleteAll();
+			this.props.navigation.navigate('Intro')
+		});
+	})
+})
+			}} style={{backgroundColor:'white'}}
+		
+				  title="Çıkış"
+				  right={() => <EnIcon name="chevron-thin-right" size={20} color="#ccc" />}
+			   />
+		
+					  </List.Section>
+		
+					</View>);
+		
+			
+		
+		}
 
 	}
 }
@@ -1758,7 +1768,6 @@ class SepetScreen extends React.Component {
 
 			{!!this.state.cart && !!this.state.cart.Items&& (
 				<FlatList
-				style={{height:Dimensions.get('window').height}}
 				data={this.state.cart.Items}
 				renderItem={({ item }) => (
 					<View>
@@ -1767,9 +1776,12 @@ class SepetScreen extends React.Component {
 							flexDirection: 'column',
 							padding: 5,
 							marginBottom: 2,
-							backgroundColor:'white',borderRadius:10,borderColor:renk,borderWidth:.5
+							backgroundColor:'white',
+							shadowOffset:{  width: 1,  height: 1,  },
+								shadowColor: 'gray',
+								shadowOpacity: 0.5,borderRadius:5
 					}}>
-					<Text style={{ color: 'red',fontSize:20 ,margin:5,textAlign:'right'}}
+					<Text style={{ color: 'gray',fontSize:12 ,margin:5,textAlign:'left'}}
 					onPress={() => this.urunsil(item.ProductId)}
 
 					>ürünü sil</Text>
@@ -1812,16 +1824,13 @@ class SepetScreen extends React.Component {
 							justifyContent: 'center',
 							margin: 4,
 					}}>
-					<View style={{ flexDirection: 'row',backgroundColor:'#eee',padding:2 ,borderRadius:10,borderColor:'gray',borderWidth:.5}}>
+					<View style={{ flexDirection: 'row',backgroundColor:'#eee',padding:2 }}>
 					<TouchableOpacity
 					style={{
-						backgroundColor: 'white',
 							borderRadius: 10,
 							width: 30,
 							height: 30,
 							alignItems: 'center',
-							borderColor: '#ccc',
-							borderWidth: 0.5,
 					}}
 					onPressIn={() =>
 						this.urunazalt(
@@ -1853,13 +1862,10 @@ class SepetScreen extends React.Component {
 
 					<TouchableOpacity
 					style={{
-						backgroundColor: 'white',
 							borderRadius: 10,
 							width: 30,
 							height: 30,
 							alignItems: 'center',
-							borderColor: '#ccc',
-							borderWidth: 0.5,
 					}}
 					onPressIn={() =>
 						this.urunarttir(
@@ -1875,8 +1881,8 @@ class SepetScreen extends React.Component {
 					</View>
 
 					<TouchableOpacity
-					style={{ position: 'absolute', bottom: 0, right: 5 }}>
-					<Text style={{ color: 'black',fontWeight:'800',fontSize:24 }}>
+					style={{ position: 'absolute', bottom: 20, right: 0,backgroundColor:'red',alignItems:'center',width:100,borderTopLeftRadius:50,borderBottomLeftRadius:50 }}>
+					<Text style={{ color: 'white',fontWeight:'800',fontSize:20 }}>
 					{item.Price} TL
 					</Text>
 
@@ -1889,41 +1895,42 @@ class SepetScreen extends React.Component {
 				)}
 				/>
 			)}
-
-
-			</ScrollView>
-
-			{this.state.cart && this.state.cart.Items&& this.state.cart.Items.length >0 &&
-				<View style={{alignItems:'center',justifyContent:'space-between',backgroundColor:'#444',flexDirection:'row',paddingLeft:10,paddingRight:0,marginBottom:60}}>
+				{this.state.cart && this.state.cart.Items&& this.state.cart.Items.length >0 &&
+				<View style={{alignItems:'center',justifyContent:'space-between',flexDirection:'row',paddingLeft:10,paddingRight:0,marginTop:40}}>
 				<View style={{flexDirection:'column'}}>
 				<View>
-				<Text style={{ color: '#fdfdfd',fontWeight:'100',fontSize:12 }}>
+				<Text style={{ color: 'black',fontWeight:'100',fontSize:12 }}>
 				Kargo: {this.state.cart.CargoTotal} TL
 				</Text>
 				</View>
 				<View style={{flexDirection:'row'}}>
 
-				<Text style={{fontSize:16,fontWeight:'800',color:'#fdfdfd'}}>Toplam:</Text>
+				<Text style={{fontSize:16,fontWeight:'800',color:'black'}}>Toplam:</Text>
 				{!!this.state.cart &&
-					<Text style={{fontSize:16,fontWeight:'800',color:'#fdfdfd'}}>{this.state.cart.Total} TL</Text>
+					<Text style={{fontSize:16,fontWeight:'800',color:'black'}}>{this.state.cart.Total} TL</Text>
 
 				}
 				</View>
 				</View>
 
-				<TouchableOpacity style={{margin:0,justifyContent:'flex-end'}} onPress={()=>{
-					this.props.navigation.navigate('Odeme',{token:this.props.navigation.state.params.token})
+				<View style={{marginRight:10,justifyContent:'flex-end'}}>
+				<Button mode="contained" onPress={()=>{
+					this.props.navigation.navigate('Odeme',{token:this.state.token})
 				}}>
-				<View style={{width:150,height:50,backgroundColor: renk,alignItems:'center',justifyContent:'center'}}>
-				<Text style={{fontWeight:'100',color:'white'}}>Ödemeye Devam Et</Text>
+				Ödemeye Devam Et
+
+				</Button>
 
 				</View>
-
-				</TouchableOpacity>
 
 
 				</View>
 			}
+
+
+			</ScrollView>
+
+		
 
 			{this.state.cart && this.state.cart.Items&&  this.state.cart.Items.length <1 &&
 					<View style={{alignItems:'center',justifyContent:'center',width:Dimensions.get('window').width,backgroundColor:'transparent',position:'absolute',bottom:0}}>
@@ -2182,7 +2189,7 @@ class Hesabim extends React.Component {
 		fetch('https://www.firsatlarkulubu.com/oauth/api/customer/myaccount-update', {
 			method: 'POST',
 			headers: { 
-				Authorization: 'Bearer ' +  this.props.navigation.state.params.token,
+				Authorization: 'Bearer ' +  this.state.token,
 				Accept: 'application/x-www-form-urlencoded',
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
@@ -2218,7 +2225,7 @@ class Hesabim extends React.Component {
 		fetch('https://www.firsatlarkulubu.com/oauth/api/customer/myaccount', {
 			method: 'GET',
 			headers: { 
-				Authorization: 'Bearer ' +  this.props.navigation.state.params.token,
+				Authorization: 'Bearer ' +  this.state.token,
 				Accept: 'application/x-www-form-urlencoded',
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
@@ -2244,12 +2251,20 @@ class Hesabim extends React.Component {
 
 	}
 	componentDidMount(){
+		var self =this
+		Realm.open({ schema: [uyeSchema,notificationSchema], schemaVersion: 5 })
+						.then(realm => {
+							//alert(JSON.stringify(realm.objects('Uyeler')["0"].token))
+							self.setState({token:realm.objects('Uyeler')["0"].token},function(){
+								//self.showcart()
+								this.getdetails()
 
-		this.getdetails()
+							});
+						})
 	}
 	render(){
 		return(
-			<View style={{flex:1,backgroundColor:'black'
+			<View style={{flex:1,backgroundColor:'white'
 
 
 			}}>
@@ -2265,27 +2280,27 @@ class Hesabim extends React.Component {
 				<Text style={{color:'red'}}>{this.state.errormessage}</Text>
 			}
 
-			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="İsim"
+			<TextInput placeholderTextColor="black" underlineColorAndroid="rgba(0,0,0,0)" 
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'black',paddingLeft:10,marginBottom:10}} placeholder="İsim"
 			onChangeText={(firstname) => this.setState({firstname})}
 			placeholder={this.state.firstname}
 
 			/>
-			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Soyİsim"
+			<TextInput placeholderTextColor="black" underlineColorAndroid="rgba(0,0,0,0)" 
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'black',paddingLeft:10,marginBottom:10}} placeholder="Soyİsim"
 			onChangeText={(lastname) => this.setState({lastname})}
 			placeholder={this.state.lastname}
 
 			/>
 
-			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Eposta" 
+			<TextInput placeholderTextColor="black" underlineColorAndroid="rgba(0,0,0,0)" 
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'black',paddingLeft:10,marginBottom:10}} placeholder="Eposta" 
 			disabled editable={false} selectTextOnFocus={false}
 			onChangeText={(email) => this.setState({email})}
 			placeholder={this.state.email}
 			/>
-			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="GSM"
+			<TextInput placeholderTextColor="black" underlineColorAndroid="rgba(0,0,0,0)" 
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'black',paddingLeft:10,marginBottom:10}} placeholder="GSM"
 			onChangeText={(gsm) => this.setState({gsm})}
 			placeholder={this.state.gsm}
 
@@ -2294,9 +2309,9 @@ class Hesabim extends React.Component {
 			</View>
 			</ScrollView>
 
-			<TouchableOpacity onPress={()=>this.doupdate()} style={{ opacity:.8,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'white',backgroundColor:'transparent',alignItems:'center',justifyContent:'center'}}>
+			<TouchableOpacity onPress={()=>this.doupdate()} style={{ opacity:.8,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'black',backgroundColor:'transparent',alignItems:'center',justifyContent:'center'}}>
 
-			<Text style={{color:'white',margin:15}}>Hesabımı Güncelle</Text>
+			<Text style={{color:'black',margin:15}}>Hesabımı Güncelle</Text>
 
 			</TouchableOpacity>
 
@@ -2325,6 +2340,21 @@ class SifreDegistir extends React.Component {
 		title: 'Home',
 		header:null
 	};
+
+
+
+	componentDidMount(){
+
+
+		var self =this
+		Realm.open({ schema: [uyeSchema,notificationSchema], schemaVersion: 5 })
+						.then(realm => {
+							//alert(JSON.stringify(realm.objects('Uyeler')["0"].token))
+							self.setState({token:realm.objects('Uyeler')["0"].token},function(){
+								///self.customerorders()
+							});
+						})
+	}
 	dorecover(){
 		if(this.state.password1==this.state.password0){
 
@@ -2362,7 +2392,7 @@ class SifreDegistir extends React.Component {
 
 	render(){
 		return(
-			<View style={{flex:1,backgroundColor:'black'
+			<View style={{flex:1,backgroundColor:'white'
 
 
 			}}>
@@ -2378,17 +2408,17 @@ class SifreDegistir extends React.Component {
 				<Text style={{color:'red'}}>{this.state.errormessage}</Text>
 			}
 
-			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Geçerli şifrenizi giriniz"
+			<TextInput placeholderTextColor="black" underlineColorAndroid="rgba(0,0,0,0)" 
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'black',paddingLeft:10,marginBottom:10}} placeholder="Geçerli şifrenizi giriniz"
 			onChangeText={(passwordeski) => this.setState({passwordeski})}
 			/>
 
-			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Yeni şifrenizi giriniz"
+			<TextInput placeholderTextColor="black" underlineColorAndroid="rgba(0,0,0,0)" 
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'black',paddingLeft:10,marginBottom:10}} placeholder="Yeni şifrenizi giriniz"
 			onChangeText={(password0) => this.setState({password0})}
 			/>
-			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Tekrar giriniz"
+			<TextInput placeholderTextColor="black" underlineColorAndroid="rgba(0,0,0,0)" 
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'black',paddingLeft:10,marginBottom:10}} placeholder="Tekrar giriniz"
 			onChangeText={(password1) => this.setState({password1})}
 			/>
 
@@ -2396,9 +2426,9 @@ class SifreDegistir extends React.Component {
 			</View>
 			</ScrollView>
 
-			<TouchableOpacity onPress={()=>this.dorecover()} style={{ opacity:.8,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'white',backgroundColor:'transparent',alignItems:'center',justifyContent:'center'}}>
+			<TouchableOpacity onPress={()=>this.dorecover()} style={{ opacity:.8,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'black',backgroundColor:'transparent',alignItems:'center',justifyContent:'center'}}>
 
-			<Text style={{color:'white',margin:15}}>Şifremi Değiştir</Text>
+			<Text style={{color:'black',margin:15}}>Şifremi Değiştir</Text>
 
 			</TouchableOpacity>
 
@@ -2462,61 +2492,67 @@ class AdresDegistir extends React.Component {
 
 	}
 	componentDidMount(){
+		var self =this
+		Realm.open({ schema: [uyeSchema,notificationSchema], schemaVersion: 5 })
+						.then(realm => {
+							//alert(JSON.stringify(realm.objects('Uyeler')["0"].token))
+							self.setState({token:realm.objects('Uyeler')["0"].token},function(){
+								//self.customerorders()
+								fetch('https://www.firsatlarkulubu.com/oauth/api/customeraddress/list', {
+									method: 'GET',
+									headers: {
+										Authorization: 'Bearer ' + this.props.navigation.state.params.token,
+										'Content-Type': 'application/x-www-form-urlencoded',
+									},
+						
+								})
+									.then(response => {
+										return response.json();
+									})
+									.then(response => {
+										alert(JSON.stringify(response[0].Id))
+						
+						
+										fetch('https://www.firsatlarkulubu.com/oauth/api/customeraddress/get/'+response[0].Id, {
+											method: 'GET',
+											headers: {
+												Authorization: 'Bearer ' + this.props.navigation.state.params.token,
+												'Content-Type': 'application/x-www-form-urlencoded',
+											},
+						
+						
+						
+						
+						
+										})
+											.then(response => {
+												return response.json();
+											})
+											.then(response => {
+												alert(JSON.stringify(response))
+						
+						
+											})
+											.catch(error => {
+												this.props.navigation.navigate('Home');
+												// alert(genelhata);
+												this.setState({ loading: false });
+											});
+						
+						
+						
+									})
+									.catch(error => {
+										this.props.navigation.navigate('Home');
+										// alert(genelhata);
+										this.setState({ loading: false });
+									});
+						
 
 
-		fetch('https://www.firsatlarkulubu.com/oauth/api/customeraddress/list', {
-			method: 'GET',
-			headers: {
-				Authorization: 'Bearer ' + this.props.navigation.state.params.token,
-				'Content-Type': 'application/x-www-form-urlencoded',
-			},
+							});
+						})
 
-
-
-
-
-		})
-			.then(response => {
-				return response.json();
-			})
-			.then(response => {
-				alert(JSON.stringify(response[0].Id))
-
-
-				fetch('https://www.firsatlarkulubu.com/oauth/api/customeraddress/get/'+response[0].Id, {
-					method: 'GET',
-					headers: {
-						Authorization: 'Bearer ' + this.props.navigation.state.params.token,
-						'Content-Type': 'application/x-www-form-urlencoded',
-					},
-
-
-
-
-
-				})
-					.then(response => {
-						return response.json();
-					})
-					.then(response => {
-						alert(JSON.stringify(response))
-
-
-					})
-					.catch(error => {
-						this.props.navigation.navigate('Home');
-						// alert(genelhata);
-						this.setState({ loading: false });
-					});
-
-
-
-			})
-			.catch(error => {
-				this.props.navigation.navigate('Home');
-				// alert(genelhata);
-				this.setState({ loading: false });
-			});
 
 
 
@@ -2524,7 +2560,7 @@ class AdresDegistir extends React.Component {
 
 	render(){
 		return(
-			<View style={{flex:1,backgroundColor:'black'
+			<View style={{flex:1,backgroundColor:'white'
 
 
 			}}>
@@ -2541,16 +2577,16 @@ class AdresDegistir extends React.Component {
 			}
 
 			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Geçerli şifrenizi giriniz"
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Geçerli şifrenizi giriniz"
 			onChangeText={(passwordeski) => this.setState({passwordeski})}
 			/>
 
 			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Yeni şifrenizi giriniz"
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Yeni şifrenizi giriniz"
 			onChangeText={(password0) => this.setState({password0})}
 			/>
 			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
-			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'white',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Tekrar giriniz"
+			style={{height: 40,width:Dimensions.get('window').width/1.2,color:'black',borderRadius:3,borderBottomWidth:.5,borderBottomColor:'white',paddingLeft:10,marginBottom:10}} placeholder="Tekrar giriniz"
 			onChangeText={(password1) => this.setState({password1})}
 			/>
 
@@ -2558,7 +2594,7 @@ class AdresDegistir extends React.Component {
 			</View>
 			</ScrollView>
 
-			<TouchableOpacity onPress={()=>this.dorecover()} style={{ opacity:.8,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'white',backgroundColor:'transparent',alignItems:'center',justifyContent:'center'}}>
+			<TouchableOpacity onPress={()=>this.dorecover()} style={{ opacity:.8,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'black',backgroundColor:'transparent',alignItems:'center',justifyContent:'center'}}>
 
 			<Text style={{color:'white',margin:15}}>Adresi güncelle</Text>
 
@@ -3956,17 +3992,16 @@ class OdemeScreen extends React.Component {
 
 	</View>
 	<View style={{alignItems:'center',justifyContent:'center'}}>
-	<TouchableOpacity style={{margin:10,justifyContent:'flex-end'}} onPress={()=>{
+	<View style={{margin:10,justifyContent:'flex-end'}} >
+	<Button  mode="contained" dark onPress={()=>{
 		//	this.completepayment()
 		this.gateway()
 	}}>
-	<View style={{width:150,height:50,backgroundColor: '#222',borderColor:'#fdfdfd',borderWidth:.4,alignItems:'center',justifyContent:'center'}}>
-	<Text style={{fontWeight:'100',color:'white'}}>Ödemeyi Tamamla</Text>
-	<Text style={{fontWeight:'100',color:'white',fontSize:10}}>3D Secure kullanılacaktır.</Text>
+	Ödemeyi Tamamla
+
+	</Button>
 
 	</View>
-
-	</TouchableOpacity>
 	</View>
 
 	</ScrollView>
@@ -4163,9 +4198,9 @@ if (response.ResultCode=='Error'){
 					height: Dimensions.get('window').height-StatusBar.currentHeight,
 			}}>
 <StatusBar
-			backgroundColor={'black'}
+			backgroundColor={'white'}
 			translucent={false}
-			barStyle="light-content"
+			barStyle="dark-content"
 			/>
 			{this.state.loading &&true &&<View style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height,alignItems:'center',justifyContent:'center',zIndex:100,position:'absolute'}}>
 				<ActivityIndicator size="small" color="black" />
@@ -4185,19 +4220,19 @@ if (response.ResultCode=='Error'){
 				<View style={{alignItems:'center'}}>
 				<View
 				style={{
-					width: Dimensions.get('window').width,backgroundColor:'black',flexDirection:'row'		
+					width: Dimensions.get('window').width,flexDirection:'row'		
 				}}>
 					<TouchableOpacity
-			style={{ marginTop: Platform.OS=='ios'?30:5, width: 30, height: 40,marginLeft:10 }}
+			style={{ marginTop: Platform.OS=='ios'?30:5, width: 30, height: 40,marginLeft:20 }}
 			onPressIn={() => this.props.navigation.pop()}>
-			<Icon2 name="arrow-left" size={20} color="gray" />
+			<Icon2 name="arrow-left" size={20} color="black" />
 			</TouchableOpacity>
 
 				{this.state.product &&
 					<Text
 					style={[
 						iOSUIKit.bodyEmphasized,
-						{ marginTop: 0, fontSize: 14, textAlign: 'center',fontWeight:'100' ,color:'white' ,marginTop: Platform.OS=='ios'?30:5,},
+						{ marginTop: 0, fontSize: 16, textAlign: 'center',fontWeight:'100' ,color:'black' ,marginTop: Platform.OS=='ios'?30:5,},
 					]}>
 					{this.state.product.Name} {this.state.product.Brand} {this.state.product.Model}</Text>
 				}
@@ -4234,37 +4269,46 @@ if (response.ResultCode=='Error'){
 				resizeMode={'cover'}
 				/>
 				</Lightbox>
-				<View style={{flexDirection:'row',alignItems:'center',backgroundColor:'#dddddd50',width:Dimensions.get('window').width,justifyContent:'center'}}>
+				<View style={{flexDirection:'column',alignItems:'center',backgroundColor:'#eeeeee50',width:Dimensions.get('window').width,justifyContent:'center'}}>
 				{this.state.product && !this.state.product.IsCampaign &&
 					<Text
 					style={[
 						iOSUIKit.bodyEmphasized,
-						{ marginTop: 0, fontSize: 20, textAlign: 'center',fontWeight:'800',marginRight:20 },
+						{ marginTop: 0, fontSize: 20, textAlign: 'center',justifyContent:'center',fontWeight:'800',margin:20 },
 					]}>
-					{this.state.product.Price} TL</Text>
+					Fiyat: {this.state.product.Price} TL</Text>
 				}
 
-				<TouchableOpacity onPress={()=>{
-					if(this.state.product.IsCampaign){
-						this.joincampaign()
-					}else{
-						this.addtocart()
-
-					}
-
-
-				}}>
-				<View style={{width:150,height:50,backgroundColor:this.state.product.IsCampaign ? '#555':'orange',borderColor:'#fdfdfd',borderWidth:.4,alignItems:'center',justifyContent:'center'}}>
+				<View >
+				<View style={{width:250,height:50,}}>
 				{this.state.product.IsCampaign && 
-					<Text style={{fontWeight:'100',color:'white'}}>Kampanyaya katıl</Text>
+					<Button title="Kampanyaya katıl" dark={true} mode="contained" onPress={()=>{
+						if(this.state.product.IsCampaign){
+							this.joincampaign()
+						}else{
+							this.addtocart()
+	
+						}
+	
+	
+					}}>Kampanyaya katıl</Button>
 				}
 				{!this.state.product.IsCampaign && 
-						<Text style={{fontWeight:'100',color:'white'}}>Sepete Ekle</Text>
+						<Button title="Sepete Ekle" dark={true} mode="contained" onPress={()=>{
+							if(this.state.product.IsCampaign){
+								this.joincampaign()
+							}else{
+								this.addtocart()
+		
+							}
+		
+		
+						}}>Sepete Ekle</Button>
 				}
 
 				</View>
 
-				</TouchableOpacity>
+				</View>
 
 				</View>
 
@@ -4463,11 +4507,13 @@ class HHeader extends React.Component {
 			resizeMode={Platform.OS=='ios'?"repeat":null}	    
 			source={require('./bg.jpg')} style={{position:'absolute',top:0,left:0,zIndex:0,opacity:.08}}
 			/>
-{false&&
+{(this.props.baslik=='Bilgilerimi Güncelle' || this.props.baslik=='Şifremi Değiştir' || this.props.baslik=='Siparişlerim' || this.props.baslik=='Hesap Ayarları')&&
 			<TouchableOpacity
 			style={
 				{
-					// position: 'absolute',
+					 position: 'absolute',
+					 left:0,
+					 bottom:8
 				}
 			}
 			onPressIn={() => {drawerContent=null;this.props.title.props.navigation.pop()}}>
@@ -4713,17 +4759,13 @@ opacity:.8,
 					flexDirection: 'row',
 					justifyContent: 'space-between',
 					marginBottom: 0,
-					elevation: 1,
+					elevation: 4,
 					paddingTop: Platform.OS === 'ios' ? 30 : 0,
-					alignItems: 'center',
-			}}>{false &&
-			<TouchableOpacity
-			activeOpacity={1}
-			onPressIn={() => {drawerContent=null;this.props.navigation.pop()}}>
-
-			<Icon2 name="arrow-left" size={20} color="white" />
-			</TouchableOpacity>
-			}
+					alignItems: 'flex-start',
+					shadowOffset:{  width: 1,  height: 1,  },
+								shadowColor: 'gray',
+								shadowOpacity: 0.5,
+			}}>
 	
 			<TextInput placeholderTextColor="#FFFFFF" underlineColorAndroid="rgba(0,0,0,0)" 
 			underlineColorAndroid="rgba(0,0,0,0)"
@@ -4737,7 +4779,7 @@ opacity:.8,
 					width: Dimensions.get('window').width / 2,
 					height: Platform.OS == 'ios' ? 30 : 40,
 					textAlign: 'center',
-					flex: 0.9,
+					flex: 0.7,
 					paddingLeft: 10,
 					marginRight: 10,
 			}}
@@ -4764,8 +4806,10 @@ opacity:.8,
 				);
 				this.setState({ searchstarted: true });
 			}}>
-			<View style={{ backgroundColor: renk }}>
-			<Text style={{ color: 'white', textAlign: 'center' }}>Ara</Text>
+			<View style={{ backgroundColor: '#fdfdfd' ,shadowOffset:{  width: 1,  height: 1,  },
+								shadowColor: 'gray',
+								shadowOpacity: 0.5,borderRadius:5,padding:8,width:100,marginRight:20 }}>
+			<Text style={{ color: 'black', textAlign: 'center' }}>Ara</Text>
 			</View>
 			</TouchableOpacity>
 			</View>
@@ -4839,7 +4883,7 @@ opacity:.8,
 				onChangeText={searchp2 => {
 					this.setState({ searchp2: searchp2 });
 				}}
-				placeholder="max"
+				placeholder="Max"
 				value={this.state.searchp2}
 				/>
 
@@ -4892,7 +4936,7 @@ opacity:.8,
 						textAlign: 'center',
 						borderRadius: 2,
 				}}>
-				Arama Sonuçları
+				Arama Sonuçları ({this.state.searchresult.length})
 				</Text>
 
 
@@ -4916,7 +4960,10 @@ opacity:.8,
 					data={this.state.searchresult}
 					renderItem={({ item }) => (
 						<TouchableOpacity
-						style={{ alignItems: 'center',width:Dimensions.get('window').width/2 - 5 }}
+						style={{ alignItems: 'center',elevation:4,width:Dimensions.get('window').width/2 - 5 ,
+						shadowOffset:{  width: 1,  height: 1,  },
+						shadowColor: 'black',
+						shadowOpacity: 0.5,borderRadius:10}}
 						onPress={() => {
 							//alert(item.Id);
 							this.props.navigation.navigate('ProductDetail', {
@@ -4929,6 +4976,9 @@ opacity:.8,
 							flexDirection: 'column',
 								alignItems: 'center',
 								textAlign: 'left',
+								shadowOffset:{  width: 1,  height: 1,  },
+						shadowColor: 'black',
+						shadowOpacity: 0.5,borderRadius:10
 						}}>
 						<Image defaultSource={require('./noimage.jpg')} 
 						style={{
@@ -4989,12 +5039,14 @@ opacity:.8,
 					data={this.state.searchresult}
 					renderItem={({ item }) => (
 						<TouchableOpacity
-						style={{ alignItems: 'center' }}
+						style={{ alignItems: 'center',shadowOffset:{  width: 1,  height: 1,  },
+						shadowColor: 'gray',
+						shadowOpacity: 0.5,borderRadius:20 }}
 						onPress={() => {
 							//alert(item.Id);
 							this.props.navigation.navigate('Urun', {
 								urun: item.Id,
-								token: this.props.navigation.state.params.token,
+								token: this.state.token,
 							});
 						}}>
 						<View
@@ -5003,10 +5055,11 @@ opacity:.8,
 								alignItems: 'center',
 								textAlign: 'center',
 								backgroundColor: 'white',
+								borderRadius:5
 						}}>
 						<Image defaultSource={require('./noimage.jpg')} 
 						style={{
-								height: 200,
+								height: 150,
 								width: 300,
 						}}
 						resizeMode={'contain'}
@@ -5044,7 +5097,7 @@ opacity:.8,
 						style={{
 							backgroundColor: 'white',
 								width: 115,
-								height: 25,
+								height:5,
 								borderRadius: 5,
 								alignItems: 'center',
 								justifyContent: 'center',
@@ -5230,6 +5283,31 @@ class IntroScreen extends React.Component {
 						Password: encodeURIComponent(this.state.Password),
 
 					},function(){
+						Realm.open({
+							schema: [uyeSchema,notificationSchema],
+							schemaVersion: 5,
+						}).then(realm => {
+							realm.write(() => {
+								realm.deleteAll();
+							});
+
+						Realm.open({ schema: [uyeSchema,notificationSchema], schemaVersion: 5 })
+						.then(realm => {
+							realm.write(() => {
+								realm.create('Uyeler', {
+									username: this.state.UserName,
+									mail: this.state.UserName,
+									sifre: encodeURIComponent(this.state.Password),
+									rank: 2,
+									token: response.access_token,
+									sepet: 0,
+								});
+							});
+						})
+						.catch(error => {
+							console.log(error);
+						});
+						})
 
 						this.setState({closelogin:false})
 						this.props.navigation.navigate('Home',{UserName:this.state.UserName,Password: encodeURIComponent(this.state.Password),token: response.access_token})
@@ -5306,6 +5384,10 @@ class IntroScreen extends React.Component {
 				<Text style={{color:'white',fontWeight:'800'}}>INTERLINK ŞİRKETLER GRUBU</Text>
 				<Text style={{color:'white'}}>
 				loyalty, müşteri sadakat programları, çalışan prim, ödül puan ve promosyon sistemlerinde sektör lideridir.</Text>
+
+		<View style={{alignItems:'center',justifyContent:'center'}}>
+<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç"/>
+</View>
 				</View>
 				<View style={[styles.slide, { backgroundColor: '#444',flex:1,alignItems:'center',justifyContent:'center' }]}>
 				{Platform.OS=='ios'&&
@@ -5320,6 +5402,9 @@ class IntroScreen extends React.Component {
 				Sadakat Programlarımız; dijital hediye katalogları, baremli kampanyalar, öner - kazan kampanyaları ve daha birçok kampanya kurgusunu içeriyor. Bu programlarla firmalara marka bilinirliği, satış artışı ve sadık müşteri kitlesi sağlama konularında destek oluyoruz.</Text>
 
 
+		<View style={{alignItems:'center',justifyContent:'center'}}>
+<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç"/>
+</View>
 				</View>
 				<View style={[styles.slide,{ backgroundColor: '#555',flex:1,alignItems:'center',justifyContent:'center' }]}>
 				{Platform.OS=='ios'&&
@@ -5333,6 +5418,9 @@ class IntroScreen extends React.Component {
 				<Text style={{color:'white'}}>
 				Marka bilinirliği ve sadık müşteri kitlesi yaratmayı hedefleyen firmalara Interlink güvencesiyle promosyon hizmeti sunuyoruz. Interlink olarak tedarik, depolama, lojistik gibi firmaların hayatını kolaylaştıran süreçlerde etkin rol oynuyoruz.</Text>
 
+		<View style={{alignItems:'center',justifyContent:'center'}}>
+<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç"/>
+</View>
 				</View>
 				<View style={[styles.slide, { backgroundColor: '#666',flex:1,alignItems:'center',justifyContent:'center' }]}>
 				{Platform.OS=='ios'&&
@@ -5346,9 +5434,11 @@ class IntroScreen extends React.Component {
 				<Text style={{color:'white'}}>
 				Müşterilerimizin memnuniyeti ve iş süreçlerimizin kusursuz ilerlemesi için destek hizmetler sunuyoruz.</Text>
 
-
+		<View style={{alignItems:'center',justifyContent:'center'}}>
+<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç"/>
+</View>
 				</View>
-
+		
 				</AppIntro>
 			}
 			{Platform.OS=='android'&&	
@@ -5356,7 +5446,7 @@ class IntroScreen extends React.Component {
 				this.props.navigation.navigate('Home')}>Çıkış yaptınız, Tekrar giriş yapmak için dokunun</Text>
 			}
 			<DropdownAlert ref={ref => this.dropdown = ref} style={{height:250}} />
-
+			
 			</View>
 
 
@@ -5609,6 +5699,9 @@ const StackNavigatorConfig = {
 		  tabBarOptions: {
 			style: {borderTopColor:'#eee',
 				backgroundColor: 'white',
+				shadowOffset:{  width: 1,  height: 1,  },
+shadowColor: 'gray',
+shadowOpacity: 0.5,
 			 },
 			 			activeTintColor: 'purple',
 			inactiveTintColor: 'gray',
