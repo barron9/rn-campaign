@@ -653,16 +653,10 @@ class HomeScreen extends React.Component {
 				/>
 				<Text style={{color:'#333',textAlign:'right',padding:20}} onPress={()=>this.props.navigation.navigate('Sifre')}>Şifremi Unuttum</Text>
 				</View>
-				<TouchableOpacity onPress={()=>this.dologin()} style={{ opacity:.8,height:50,width:Dimensions.get('window').width/1.2,borderWidth:2,borderColor:'#ccc',backgroundColor:'#ccc',alignItems:'center',justifyContent:'center'}}>
-				{!this.state.loading &&
-					<Text style={{color:'#333',margin:15}}>Giriş Yap</Text>
-				}
-				{this.state.loading &&
-						<ActivityIndicator size="small" color="#ccc" />
+				<Button onPress={()=>this.dologin()} mode="contained" dark style={{width:Dimensions.get('window').width/1.2}}>
+				Giriş Yap
 
-				}
-
-				</TouchableOpacity>
+				</Button>
 				<Text style={{color:'#333',textAlign:'right',marginTop:10,marginBottom:10}} onPress={()=>this.props.navigation.navigate('Kayit')}>Hesabınız yok mu?<Text style={{color:'blue'}}> Kayıt Olun</Text></Text>
 
 
@@ -757,22 +751,34 @@ shadowOpacity: 0.5,borderBottomRightRadius:30,borderBottomLeftRadius:30}}>
 shadowColor: 'gray',
 shadowOpacity: 0.5,
 }}>
+	{item.IsCampaign&&item.Name.indexOf("%")>-1&&
+
+<View style={{position:'absolute',borderTopLeftRadius:20,borderBottomLeftRadius:20,backgroundColor:'red',right:0,top:10,zIndex:20,alignItems:'center',justifyContent:'center',shadowOffset:{  width: 2,  height: 2,  },
+					shadowColor: 'black',
+					shadowOpacity: 0.5,}}>
+
+					<Text
+					style={[
+						iOSUIKit.bodyEmphasized,
+						{ fontSize: 20, textAlign: 'center',fontWeight:'900' ,color:'white',margin:10 },
+					]}>
+					{item.Name.indexOf("%")>-1?item.Name.substring(0,3):item.Name.substring(0,5)} </Text>
+				
+</View>}
 							<Image
 							style={{ width: Dimensions.get('window').width, height: 150,margin:10,}}
 							resizeMode={'contain'}
 							source={{ uri: 'https:' + item.Image }}
 							/>
 							<View style={{flexDirection:'column',marginTop:4,alignItems:'center',justifyContent:'center',width:200}}>
-							<Text style={{color:'black',fontSize:14}}>{item.Name}</Text><Text style={{color:'black',fontSize:16}}>{item.Brand}</Text>
-							<Text style={{color:'black',fontSize:14}}>{item.Model}</Text>
+							<Text style={{color:'black',fontSize:16,fontWeight:'900'}}>{item.Name}</Text>
+							<Text style={{color:'black',fontSize:14}}>{item.Brand}</Text>
 							{item.Price > 1 &&
 								<Text style={{color:'black',fontSize:20,fontWeight:'800'}}>{item.Price} TL</Text>
 							}
 		
 							</View>
-							{item.Price < 1 &&
-							<View style={{position:'absolute',alignItems:'center',justifyContent:'center',bottom:20,right:21,backgroundColor:'purple',width:60,height:60,borderRadius:30}}><Text style={{color:'white',fontSize:24,fontWeight:'800'}}>{item.Name.split(" ")[0]}</Text></View>
-							}
+							
 							</View></TouchableOpacity>}
 								/>
 						}
@@ -1017,6 +1023,22 @@ class FirsatlarScreen extends React.Component {
 					<View style={{flexDirection:'column',shadowOffset:{  width: 1,  height: 1,  },
 								shadowColor: 'gray',
 								shadowOpacity: 0.5,margin:20,alignItems:'center',width:Dimensions.get('window').width-20,backgroundColor:'white',margin:10,elevation:4,borderRadius:8}}>
+					
+					{item.IsCampaign&&item.Name.indexOf("%")>-1&&
+
+<View style={{position:'absolute',borderTopLeftRadius:20,borderBottomLeftRadius:20,backgroundColor:'red',right:0,top:10,zIndex:20,alignItems:'center',justifyContent:'center',shadowOffset:{  width: 2,  height: 2,  },
+					shadowColor: 'black',
+					shadowOpacity: 0.5,}}>
+
+					<Text
+					style={[
+						iOSUIKit.bodyEmphasized,
+						{ fontSize: 20, textAlign: 'center',fontWeight:'900' ,color:'white',margin:10 },
+					]}>
+					{item.Name.indexOf("%")>-1?item.Name.substring(0,3):item.Name.substring(0,5)} </Text>
+				
+</View>}
+					
 					<Image
 					style={{ width: Dimensions.get('window').width, height: 150,margin:10,}}
 					resizeMode={'contain'}
@@ -1136,18 +1158,27 @@ class Siparisler extends React.Component {
 			<HHeader baslik="Siparişlerim" title={this}/>
 
 
-			{this.state.orders  &&
-				<FlatList horizontal={false} style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height-60}}
-				data={this.state.orders}
-				renderItem={({item}) => <TouchableOpacity style={{backgroundColor:'white',padding:10,borderRadius:9,borderColor:'#eee',borderBottomWidth:.5,marginBottom:0,margin:15 }} onPress={()=>this.props.navigation.navigate('SiparisDetay',{token:this.state.token,siparis:item.OrderId})} >
-					<View style={{flexDirection:'row',alignItems:'center',width:Dimensions.get('window').width,justifyContent:'center',marginLeft:20,}}>
-					<View style={{flexDirection:'column',marginTop:4,width:Dimensions.get('window').width,marginLeft:20}}>
-					<Text style={{color:'black',fontSize:12}}>Sipariş Tarihi: {item.OrderDate}</Text><Text style={{color:'black',fontSize:16}}>Sipariş Durumu: {item.OrderState}</Text><Text style={{color:'black',fontSize:12}}>Sipariş No: {item.OrderNumber}</Text>
-					</View>
-					</View></TouchableOpacity>}
-				/>
-			}
+		
 
+			{this.state.orders  &&
+
+				 <List.Section title="Siparişlerinizi takip edebilirsiniz">
+
+<FlatList data={this.state.orders} renderItem={({ item }) => (
+	<View>
+	<List.Item style={{marginTop:10,marginLeft:10,marginRight:10,elevation:2,borderTopLeftRadius:10,borderTopRightRadius:10,backgroundColor:'white',justifyContent:'center'}} onPress={()=>this.props.navigation.navigate('SiparisDetay',{token:this.state.token,siparis:item.OrderId})} title={'Sipariş No: ' + item.OrderNumber }  right={() => <Icon name="angle-right" size={20}
+color="gray"/>}>
+		</List.Item>
+	<View style={{backgroundColor:'gray',marginLeft:10,marginRight:10}}><Text style={{fontSize:12,color:'white',fontWeight:'800',paddingLeft:15}}>Tarih: {item.OrderDate.split('T')[0] + ' Saat: ' + item.OrderDate.split('T')[1].split('.')[0]}</Text></View>
+
+	</View>
+
+
+
+)}/>
+
+		</List.Section>
+			}
 
 			{this.state.loading &&true &&<View style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height,alignItems:'center',justifyContent:'center',zIndex:900,position:'absolute'}}>
 					<ActivityIndicator size="small" color="black" />
@@ -1224,13 +1255,72 @@ class SiparisDetay extends React.Component {
 		return(
 			<View>{this.state.siparis  &&
 
-				<HHeader baslik={baslik} title={this}/>
+				<HHeader baslik="Sipariş Detay" title={this}/>
 			}
 
-
 			{this.state.siparis  &&
-					<Text>{JSON.stringify(this.state.siparis)}</Text>  }
+			<View style={{margin:10}}>
 
+
+<List.Section style={{margin:5,elevation:1,borderRadius:5,backgroundColor:'white',padding:10}}>
+<Title>Sepet Detayı</Title>
+<Text>Ürün adedi: {this.state.siparis.Items.length}</Text>
+{this.state.siparis.ShoppingCart.Cash>0 &&
+<Text >Ödenen Miktar: {this.state.siparis.ShoppingCart.Cash>0?this.state.siparis.ShoppingCart.Cash:''} {this.state.siparis.ShoppingCart.Cash>0 ? 'TL':''}</Text>
+}
+<Text>Toplam: {this.state.siparis.ShoppingCart.Total} Puan</Text>
+
+
+
+	<FlatList
+data={this.state.siparis.Items}
+renderItem={(item)=><View style={{margin:5,elevation:1,borderRadius:5,backgroundColor:'white',padding:10,flexDirection:'row'}}>
+		<Image defaultSource={require('./noimage.jpg')}
+	source={{ uri: 'https:' + item.item.ProductImage }}
+	style={{ width: 50, height: 50 }}
+	/>
+
+<View>
+	<Text>{(item.item.ProductName)}</Text>
+	<Text>Adet: {(item.item.Quantity)}</Text>
+	<Text>Fiyat: {(item.item.Price)}</Text>
+
+	<Text>Sipariş Durumu: {(item.item.OrderState)}</Text>
+	</View>
+
+	</View>}
+
+
+/>
+
+</List.Section>
+
+ <List.Section style={{margin:5,elevation:1,borderRadius:5,backgroundColor:'white',padding:10}}>
+<Title>Teslimat Bilgileri</Title>
+
+<Text>İsim: {this.state.siparis.ShippingPerson}</Text>
+<Text>Adres: {this.state.siparis.ShippingAddress} {this.state.siparis.ShippingCity} {this.state.siparis.ShippingTown} {this.state.siparis.ShippingCountry}</Text>
+
+</List.Section>
+<List.Section style={{margin:5,elevation:1,borderRadius:5,backgroundColor:'white',padding:10}}>
+<Title>Fatura Bilgileri</Title>
+
+<Text>İsim: {this.state.siparis.BillingPerson}</Text>
+<Text>Adres: {this.state.siparis.BillingAddress} {this.state.siparis.BillingCity} {this.state.siparis.BillingTown} {this.state.siparis.BillingCountry}</Text>
+
+</List.Section>
+{this.state.siparis.CargoLink!==null &&
+<List.Section  style={{margin:5,elevation:1,borderRadius:5,backgroundColor:'white',padding:10}}>
+<Title>Kargo Bağlantısı</Title>
+
+<Text onPress={()=>{if(this.state.siparis.CargoLink==null)return;
+	Linking.openURL(this.state.siparis.CargoLink).catch(err => alert('hata oluştu'+err))}}>Kargo Linki: {this.state.siparis.CargoLink!==null?this.state.siparis.CargoLink:'Kargo takip linkiniz henüz oluşmadı'}</Text>
+
+</List.Section>
+}
+
+</View>
+			}
 
 			{this.state.loading &&true &&<View style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height,alignItems:'center',justifyContent:'center',zIndex:900,position:'absolute'}}>
 					<ActivityIndicator size="small" color="black" />
@@ -4078,11 +4168,9 @@ class UrunScreen extends React.Component {
 			})
 			.then(response => {
 				//alert(this.state.ddd[0].Id),
-				//	alert(JSON.stringify(response))
-				//alert()
+			//	alert(JSON.stringify(response))
 				this.setState({ product: response });
-				var fruits = [];
-				var desc
+var desc =''
 				for (var i = 0; i < response.Description.length; i++) {
 				desc+=response.Description[i]+' '
 
@@ -4220,12 +4308,13 @@ if (response.ResultCode=='Error'){
 				<View style={{alignItems:'center'}}>
 				<View
 				style={{
-					width: Dimensions.get('window').width,flexDirection:'row'		
+					width: Dimensions.get('window').width,flexDirection:'row',alignItems:'center'		
 				}}>
 					<TouchableOpacity
-			style={{ marginTop: Platform.OS=='ios'?30:5, width: 30, height: 40,marginLeft:20 }}
+			style={{ marginTop: Platform.OS=='ios'?30:5, width: 40, height: 40,marginLeft:20 ,backgroundColor:'#ddd',borderRadius:20,alignItems:'center',justifyContent:'center'}}
 			onPressIn={() => this.props.navigation.pop()}>
-			<Icon2 name="arrow-left" size={20} color="black" />
+			<Icon2 name="arrow-left" size={20} color="gray" />
+			
 			</TouchableOpacity>
 
 				{this.state.product &&
@@ -4238,7 +4327,18 @@ if (response.ResultCode=='Error'){
 				}
 
 				</View>
+				{this.state.product &&this.state.product.IsCampaign&&
 
+<View style={{position:'absolute',borderTopLeftRadius:20,borderBottomLeftRadius:20,backgroundColor:'red',right:0,top:100,zIndex:20,alignItems:'center',justifyContent:'center'}}>
+
+					<Text
+					style={[
+						iOSUIKit.bodyEmphasized,
+						{ fontSize: 20, textAlign: 'center',fontWeight:'900' ,color:'white',margin:10 },
+					]}>
+					{this.state.product.Name.indexOf("%")>-1?this.state.product.Name.substring(0,3):this.state.product.Name.substring(0,5)} </Text>
+				
+</View>}
 
 
 				<Lightbox
@@ -4313,13 +4413,15 @@ if (response.ResultCode=='Error'){
 				</View>
 
 
-				<Text style={{fontWeight:'100',textAlign:'left',width:Dimensions.get('window').width,padding:10}}>
-				Ürün Özellikleri:{'\n'}
+				<Text style={{fontWeight:'900',textAlign:'center',width:Dimensions.get('window').width,padding:10}}>
+				Ürün Özellikleri{'\n'}
 				</Text>
+				{this.state.desc &&
 				<WebView
-				source={{html:'<html><body><font style="font-size:40px">'+this.state.desc+'</font></body></html>' }}
+				source={{html:'<html><body><font style="font-size:40px">'+(this.state.desc)+'</font></body></html>' }}
 style={{height:250,width:Dimensions.get('window').width}}
 				/>
+				}
 
 				</View>
 
@@ -4507,7 +4609,7 @@ class HHeader extends React.Component {
 			resizeMode={Platform.OS=='ios'?"repeat":null}	    
 			source={require('./bg.jpg')} style={{position:'absolute',top:0,left:0,zIndex:0,opacity:.08}}
 			/>
-{(this.props.baslik=='Bilgilerimi Güncelle' || this.props.baslik=='Şifremi Değiştir' || this.props.baslik=='Siparişlerim' || this.props.baslik=='Hesap Ayarları')&&
+{(this.props.baslik == 'Sipariş Detay'||this.props.baslik=='Bilgilerimi Güncelle' || this.props.baslik=='Şifremi Değiştir' || this.props.baslik=='Siparişlerim' || this.props.baslik=='Hesap Ayarları')&&
 			<TouchableOpacity
 			style={
 				{
@@ -5057,6 +5159,20 @@ opacity:.8,
 								backgroundColor: 'white',
 								borderRadius:5
 						}}>
+						{item.IsCampaign&&item.Name.indexOf("%")>-1&&
+
+<View style={{position:'absolute',borderTopLeftRadius:20,borderBottomLeftRadius:20,backgroundColor:'red',right:0,top:10,zIndex:20,alignItems:'center',justifyContent:'center',shadowOffset:{  width: 2,  height: 2,  },
+					shadowColor: 'black',
+					shadowOpacity: 0.5,}}>
+
+					<Text
+					style={[
+						iOSUIKit.bodyEmphasized,
+						{ fontSize: 20, textAlign: 'center',fontWeight:'900' ,color:'white',margin:10 },
+					]}>
+					{item.Name.indexOf("%")>-1?item.Name.substring(0,3):item.Name.substring(0,5)} </Text>
+				
+</View>}
 						<Image defaultSource={require('./noimage.jpg')} 
 						style={{
 								height: 150,
@@ -5386,7 +5502,7 @@ class IntroScreen extends React.Component {
 				loyalty, müşteri sadakat programları, çalışan prim, ödül puan ve promosyon sistemlerinde sektör lideridir.</Text>
 
 		<View style={{alignItems:'center',justifyContent:'center'}}>
-<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç"/>
+		<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç">Geç</Button>
 </View>
 				</View>
 				<View style={[styles.slide, { backgroundColor: '#444',flex:1,alignItems:'center',justifyContent:'center' }]}>
@@ -5403,7 +5519,7 @@ class IntroScreen extends React.Component {
 
 
 		<View style={{alignItems:'center',justifyContent:'center'}}>
-<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç"/>
+		<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç">Geç</Button>
 </View>
 				</View>
 				<View style={[styles.slide,{ backgroundColor: '#555',flex:1,alignItems:'center',justifyContent:'center' }]}>
@@ -5419,7 +5535,7 @@ class IntroScreen extends React.Component {
 				Marka bilinirliği ve sadık müşteri kitlesi yaratmayı hedefleyen firmalara Interlink güvencesiyle promosyon hizmeti sunuyoruz. Interlink olarak tedarik, depolama, lojistik gibi firmaların hayatını kolaylaştıran süreçlerde etkin rol oynuyoruz.</Text>
 
 		<View style={{alignItems:'center',justifyContent:'center'}}>
-<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç"/>
+<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç">Geç</Button>
 </View>
 				</View>
 				<View style={[styles.slide, { backgroundColor: '#666',flex:1,alignItems:'center',justifyContent:'center' }]}>
@@ -5435,7 +5551,7 @@ class IntroScreen extends React.Component {
 				Müşterilerimizin memnuniyeti ve iş süreçlerimizin kusursuz ilerlemesi için destek hizmetler sunuyoruz.</Text>
 
 		<View style={{alignItems:'center',justifyContent:'center'}}>
-<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç"/>
+		<Button onPress={()=>this.props.navigation.navigate('Home')} title="Geç">Geç</Button>
 </View>
 				</View>
 		
